@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SimpleTech Task Manager</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+    <style>
+        .screenshot img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>SimpleTech Task Manager</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#details">Details</a></li>
+                <li><a href="#workflow">Workflow</a></li>
+                <li><a href="#screenshots">Screenshots</a></li>
+                <li><a href="#code">Code</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="details">
+        <h2>Details</h2>
+        <p>SimpleTech Task Manager is a Windows Forms application designed to seamlessly assign, track, and manage technician tasks across multiple shifts. It features a user-friendly interface for task allocation, acknowledgment, and completion tracking, ensuring operational efficiency and accountability.</p>
+    </section>
+
+    <section id="workflow">
+        <h2>Workflow</h2>
+        <ol>
+            <li>Administrators can log in to assign tasks to technicians for a specific shift.</li>
+            <li>Technicians log in to view, acknowledge, and sign off on their assigned tasks.</li>
+            <li>Tasks can be updated in real-time to reflect their current status.</li>
+            <li>Completion of tasks is recorded for audit purposes, ensuring seamless multi-shift operations.</li>
+        </ol>
+    </section>
+
+    <section id="screenshots">
+        <h2>Screenshots</h2>
+        <div class="screenshot">
+            <img src="STTA.png" alt="Task Assignment Interface" />
+            <p>Administrator interface for assigning tasks.</p>
+        </div>
+        <div class="screenshot">
+            <img src="STAI.png" alt="Technician Task View" />
+            <p>Technician view for acknowledging and completing tasks.</p>
+        </div>
+    </section>
+
+    <section id="code">
+        <h2>Code</h2>
+        <pre>
+<code class="language-csharp">
+// Task Assignment Logic
+public void AssignTask(string technician, string taskDetails) {
+    Task newTask = new Task {
+        TechnicianName = technician,
+        Details = taskDetails,
+        Status = "Assigned",
+        AssignedTime = DateTime.Now
+    };
+    taskList.Add(newTask);
+    UpdateTaskView();
+}
+
+// Task Completion Logic
+public void CompleteTask(int taskId) {
+    var task = taskList.FirstOrDefault(t => t.Id == taskId);
+    if (task != null) {
+        task.Status = "Completed";
+        task.CompletedTime = DateTime.Now;
+        UpdateTaskView();
+    }
+}
+
+// Update UI with Current Tasks
+private void UpdateTaskView() {
+    taskDataGrid.DataSource = taskList.ToList();
+    taskDataGrid.Refresh();
+}
+</code>
+        </pre>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Luke Whitehouse. All rights reserved.</p>
+    </footer>
+</body>
+</html>

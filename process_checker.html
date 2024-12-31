@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerShell Process Checker</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-powershell.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>PowerShell Process Checker</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#details">Details</a></li>
+                <li><a href="#workflow">Workflow</a></li>
+                <li><a href="#screenshots">Screenshots</a></li>
+                <li><a href="#code">Code</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section id="details">
+        <h2>Details</h2>
+        <p>The PowerShell Process Checker is a custom script designed to streamline the daily checks of AHCS application processes. It automates navigating the PowerTerm application, extracting data from the LUI (process list), and verifying that all predefined processes are running as expected. The tool is particularly useful for ensuring operational consistency and identifying missing processes in real-time.</p>
+    </section>
+    
+    <section id="workflow">
+        <h2>Workflow</h2>
+        <ol>
+            <li>The script launches a pre-configured PowerTerm session using a shortcut file.</li>
+            <li>It retrieves process data from the AHCS application using the LUI command.</li>
+            <li>Process data is captured and stored in a temporary file for processing.</li>
+            <li>The script cross-references the captured data with a predefined list of required processes.</li>
+            <li>It generates a summary, indicating whether all processes are running or listing any missing processes.</li>
+            <li>The PowerTerm session is terminated after completion.</li>
+        </ol>
+    </section>
+    
+    <section id="screenshots">
+        <h2>Screenshots</h2>
+        </div>
+        <div class="screenshot">
+            <img src="PCHP.png" alt="Home Page" />
+            <p>Windows Form on launch of script for an easy GUI.</p>
+        </div>
+        <div class="screenshot">
+            <img src="SOP.png" alt="Output Summary" />
+            <p>Script output showing the summary of all processes.</p>
+        </div>
+    </section>
+    
+    <section id="code">
+        <h2>Code Snippet</h2>
+        <pre>
+<code class="language-powershell">
+function Show-Message {
+    param ([string]$message)
+    [System.Windows.Forms.MessageBox]::Show($message)
+}
+
+function Execute-ProcessCheck {
+    param ([string]$tempFile, [array]$requiredProcesses)
+
+    $output = ""
+    $notFound = @()
+
+    foreach ($process in $requiredProcesses) {
+        $count = (Get-Content $tempFile | Select-String $process -AllMatches).Matches.Count
+        if ($count -eq 0) {
+            $notFound += $process
+        }
+    }
+
+    if ($notFound.Count -gt 0) {
+        $output = "Missing processes: `n" + ($notFound -join "`n")
+    } else {
+        $output = "All required processes are running."
+    }
+
+    return $output
+}
+
+$tempFile = New-TemporaryFile
+# Simulate data capture from PowerTerm session
+Add-Content -Path $tempFile -Value "Process1`nProcess2`nProcess3"
+
+$requiredProcesses = @("Process1", "Process2", "Process4")
+$result = Execute-ProcessCheck -tempFile $tempFile -requiredProcesses $requiredProcesses
+
+Write-Host $result
+Remove-Item -Path $tempFile -Force
+</code>
+        </pre>
+    </section>
+    
+    <footer>
+        <p>&copy; 2024 Luke Whitehouse. All rights reserved.</p>
+    </footer>
+</body>
+</html>

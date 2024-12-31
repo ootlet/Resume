@@ -1,0 +1,124 @@
+/* General Reset */
+body, h1, h2, p, ul {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Body Styles */
+body {
+    line-height: 1.6;
+    background-color: #1a1a2e;
+    color: #ffffff;
+    padding: 0 20px;
+}
+
+/* Header Section */
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #16213e;
+    color: white;
+    padding: 20px;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+}
+
+.title-section h1 {
+    margin-bottom: 10px;
+    color: #0f3460;
+}
+
+.title-section p {
+    color: #e94560;
+}
+
+.profile-picture img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid #0f3460;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+header nav ul li {
+    margin: 0 15px;
+}
+
+header nav ul li a {
+    color: #e94560;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+header nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Section Styles */
+section {
+    margin: 20px auto;
+    max-width: 800px;
+    background: #0f3460;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+section h2 {
+    color: #e94560;
+    margin-bottom: 10px;
+}
+
+.project h3 a {
+    color: #e94560;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.project h3 a:hover {
+    text-decoration: underline;
+}
+
+/* Contact Section */
+#contact ul {
+    list-style: none;
+    padding: 0;
+}
+
+#contact ul li {
+    margin-bottom: 10px;
+}
+
+#contact ul li a {
+    color: #e94560;
+    text-decoration: none;
+}
+
+#contact ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Footer Styles */
+footer {
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px;
+    background: #0f3460;
+    color: white;
+    border-radius: 8px;
+}
